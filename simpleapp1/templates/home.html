@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<html>
+<head>
+	<title>
+		home
+	</title>
+	<!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<br>
+<div class="container headercolor">
+	<!-- <div class="row"> -->
+		<div class="col-md-4">
+			<a href="home.html">
+				&nbsp &nbsp Home
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a href="working.html">
+			How it works
+			</a>
+		</div>
+		<div class="col-md-4">
+			<a href="contact.html">
+			 &nbsp &nbsp Contact
+			</a>
+		</div>
+	<!-- </div> -->
+</div>
+<div class="container">
+    <div class="col-md-8">
+    <h3>
+	Build your vocabulary and Learn a new language using movies and media. 
+	</h3>
+    <iframe width= 100% height= 65%
+		src="http://www.youtube.com/embed/OC83NA5tAGE?autoplay=0">
+	</iframe> 
+	<h3 class="sutitlesborder">
+		&nbsp &nbsp &nbsp Subtitles in desired language will be displayed here<br>
+	</h3>
+    </div>
+
+    <div class="col-md-4">
+      &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <img src="{%static 'media/polyglot.JPG'%}"style="width:150px;height:150px;">
+	  <form class="form-signin">
+	    <h2 class="form-signin-heading">Login</h2>
+	    <label for="inputEmail" class="sr-only">Email address</label>
+	    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+	    <label for="inputPassword" class="sr-only">Password</label>
+	    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+	    <div class="checkbox">
+	      <label>
+	        <input type="checkbox" value="remember-me"> Remember me
+	      </label>
+	    </div>
+	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	  </form>
+	  <h3 class="meaningsborder">
+	  	 Meanings of new vocabulary are displayed here
+	  </h3>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,22 @@
+a{
+font-size: 14pt;
+}
+.sutitlesborder {
+    border-style: solid;
+    border-width: 2px;
+    height:8%;
+    width:100%;
+    border-color: #BBC2BA;
+	background-color:#FFFFF3;
+}
+.meaningsborder {
+    border-style: solid;
+    border-width: 2px;
+    width:100%;
+    height:30%;
+    border-color: #BBC2BA;
+	background-color:#FFFFF3;
+}
+.headercolor {
+	background-color: lightblue;
+}
