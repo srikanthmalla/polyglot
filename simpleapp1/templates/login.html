@@ -1,0 +1,33 @@
+{% extends 'home.html' %}
+
+{% block content %}
+	{% if form.errors %}
+	{% endif %}
+
+	<form class="form-signup" action="/accounts/auth/" method="post">{% csrf_token %}
+		<div class="col-md-2">
+		    <label for="username" class="sr-only">Username</label>
+		    <input type="text" id="username" class="form-control" placeholder="User name" required autofocus>
+		</div>
+		<div class="col-md-2">
+		    <label for="password" class="sr-only">Password</label>
+		    <input type="password" id="password" class="form-control" placeholder="Password" required>
+		</div>
+		<div class="col-md-1">
+		    <button class="btn btn-default btn-primary btn-block" type="submit">Login</button>{% csrf_token %}
+		</div>
+	</form>
+{% endblock %}
+<!-- 	<form class="form-signup" action="/auth/" method="post">{% csrf_token %}
+		<div class="col-md-2">
+		    <label for="username" class="sr-only">Username</label>
+		    <input type="text" id="username" class="form-control" value="" placeholder="User name" required autofocus>
+		</div>
+		<div class="col-md-2">
+		    <label for="password" class="sr-only">Password</label>
+		    <input type="password" id="password" class="form-control" value="" placeholder="Password" required>
+		</div>
+		<div class="col-md-1">
+		    <button class="btn btn-default btn-primary btn-block" type="submit">Login</button>
+		</div>
+	</form> -->
