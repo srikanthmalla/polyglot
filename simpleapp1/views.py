@@ -31,12 +31,13 @@ def subs(request):
 	return render(request,"subs.html",{'subtitles':r.recognize_google(audio,language="en-US")})
 def home(request):
 	return render(request,"login.html",{'subtitles': datetime.datetime.now()})
-# def login(request):
-# 	return render(request,'login.html')
+def login(request):
+	return render(request,'test.html')
 def auth_view(request):
-	username= request.POST.get('username')
-	password= request.POST.get('password')
+	username= request.POST.get("username","")
+	password= request.POST.get("password","")
 	user =auth.authenticate(username=username,password=password)
+
 	if user is not None:
 		auth.login(request, user)
 		return HttpResponseRedirect('/accounts/loggedin')
