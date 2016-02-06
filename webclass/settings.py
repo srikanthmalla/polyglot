@@ -100,16 +100,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'simpleapp1/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # for heroku deployment
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = '/app/simpleapp1/static'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join('/app/simpleapp1/static'),
