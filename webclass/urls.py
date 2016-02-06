@@ -1,8 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from dajaxice.core import dajaxice_autodiscover
-dajaxice_autodiscover()
 
 urlpatterns = [
 	url(r'^$', 'simpleapp1.views.home'),
