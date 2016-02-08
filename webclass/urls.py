@@ -1,6 +1,9 @@
-from django.conf.urls import include, url
 from django.contrib import admin
 
+#for uploading stuff
+from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 	url(r'^$', 'simpleapp1.views.home'),
@@ -13,6 +16,8 @@ urlpatterns = [
     url(r'^accounts/logout/','simpleapp1.views.logout'),
     url(r'^accounts/loggedin/','simpleapp1.views.loggedin'),
     url(r'^accounts/invalid/','simpleapp1.views.invalid_login'),
-    url(r'^accounts/register/','simpleapp1.views.register_user'),
+    url(r'^accounts/register/$','simpleapp1.views.register_user'),
     url(r'^accounts/register_success/','simpleapp1.views.register_success'),
+    url(r'^upload/','simpleapp1.views.upload'),
+    url(r'^upload_pic/','simpleapp1.views.upload_pic')
 ]

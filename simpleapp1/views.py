@@ -4,11 +4,15 @@ from django.contrib import auth#login authentication model
 from django.core.context_processors import csrf #cross site ref forgery
 from django.contrib.auth.forms import UserCreationForm
 from os import path
+from django.http import HttpResponseForbidden,HttpResponse
+from django.core.urlresolvers import reverse
 
+#for voice to text thing
 from scipy.io.wavfile import read
 import speech_recognition as sr
 import datetime
-# Create your views here.
+
+
 def subs(request):
 	WAV_FILE = path.join(path.dirname(path.realpath(__file__)), "test.wav")
 	# (fs,w_file)=read("test.wav")#this is to do operations on that wav file
@@ -63,3 +67,15 @@ def register_user(request):
 	return render(request,'register.html',args)
 def register_success(request):
 	return render(request,'register_success.html')
+
+def upload_pic(request):
+	for count,x in enumerate(request.FILES.getlist("files")):
+		def process(f):
+			with open('/home/malla/Documents/webclass/media/file_'+str(count), 'wb+') as destination:
+				for chunk in f.chunks():
+					destination.write(chunk)
+		process(x)
+	return HttpResponse("File(s) uploaded!")
+
+def upload(request):
+	return render(request,'upload.html',{})
