@@ -3,30 +3,15 @@
 <html>
 <head>
 	<title>
-		home
+		Home
 	</title>
 	<!-- <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
- 	<script>
-		var ALARM_URL = "subs";
-		function refresh() {
-		  $.ajax({
-		  url: ALARM_URL,
-		  success: function(data) {
-		    $('#right').html(data);
-		  }
-		 });
-		}        
-        $(document).ready(function () {
-		  setInterval(function(){ refresh();}, 5000);
-		  // setInterval(function(){ alert("Hello"); }, 5000);
-	      console.log( "ready!" );
-		})
-	</script>
-
+ 	<script src="{% static 'js/main.js' %}"></script>
+ 	
 </head>
 <body>
 <br>
@@ -77,43 +62,48 @@
 </div>
 <div class="container">
     <div class="col-md-8">
-
-    <iframe width= 100% height= 65%
-		src="http://www.youtube.com/embed/OC83NA5tAGE?autoplay=0">
-	</iframe>
-	<h3 class="sutitlesborder">
-	<div id="right"> 
-	{{subtitles}}
-	</div>
-	</h3>
+    	<div>
+        <video id="v" controls width=100% >
+	        <source src="{% static 'media/disn.mp4' %}" type="video/mp4" />	
+	    </video> 
+	    <div id="overlay" style="visibility:hidden">
+	    <!-- language question -->
+	    <form>
+	   		<STRONG>Question 1</STRONG>: What does Ni hao (chinese) means in (english)?<br>
+			<INPUT TYPE="radio" NAME="q1" VALUE="1">Hello
+			<INPUT TYPE="radio" NAME="q1" VALUE="2">Bye
+		    <INPUT TYPE="radio" NAME="q1" VALUE="3">Good luck 
+			<INPUT TYPE="radio" NAME="q1" VALUE="4">Good morning <br>
+			<button type="submit" style="color:black">Submit</button>
+	    </form>
+	    </div>
+	    </div>
+		<h3 class="sutitlesborder">
+		<div id="right"> 
+		{{subtitles}}
+		</div>
+		</h3>
     </div>
 
     <div class="col-md-4">
 <!--       &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <img src="{%static 'media/polyglot.JPG'%}"style="width:150px;height:150px;"> -->
-  		<form class="form-signup">
-  		<h2>SignUp</h2>
-  		<div class="row">
-	  		<div class="col-md-6">
-	  		<label for="fname" class="sr-only">Name</label>
-	  	    <input type="text" id="fname" class="form-control" placeholder="First Name" required autofocus>
-	    	</div>
-	    	<div class="col-md-6">
-	  		<label for="lname" class="sr-only">Last Name</label>
-	  	    <input type="text" id="lname" class="form-control" placeholder="Last Name" required autofocus>
-	    	</div>
-	    </div>
-	    <label for="inputEmail" class="sr-only">Email address</label>
-	    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-	    <label for="inputPassword" class="sr-only">Password</label>
-	    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-	    <button class="btn btn-default btn-primary btn-block" type="submit">Signup</button>
-
-	    </form>
+	{% block signup %}
+	{% endblock %}
 
 	  <h3 class="meaningsborder">
 	  	 Meanings of new vocabulary are displayed here
 	  </h3>
     </div>
 </div> <!-- /container -->
+
+<script>
+ 	  var overlay= document.getElementById('overlay');
+	  var video= document.getElementById('v');
+	  video.addEventListener('timeupdate', function() {
+	    var show= video.currentTime>=5 && video.currentTime<6;
+	    overlay.style.visibility= show? 'visible' : 'hidden';
+	    if(show){this.pause();}
+	  }, false);
+</script>
 </body>
 </html>
