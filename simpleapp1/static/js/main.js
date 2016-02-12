@@ -1,4 +1,4 @@
-var ALARM_URL = "subs";
+var ALARM_URL = "/subs";
 function refresh() {
   $.ajax({
   url: ALARM_URL,

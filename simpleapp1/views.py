@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from os import path
 from django.http import HttpResponseForbidden,HttpResponse
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+
 from .forms import VideoUploadForm
 from .models import VideoUpload
 #for voice to text thing
@@ -37,8 +39,8 @@ def subs(request):
 	return render(request,"subs.html",{'subtitles':r.recognize_google(audio,language="en-US")})
 def home(request):
 	return render(request,"login.html",{'subtitles': datetime.datetime.now()})
-def login(request):
-	return render(request,'test.html')
+# def login(request):
+# 	return render(request,'login.html',{'subtitles': datetime.datetime.now()})
 def auth_view(request):
 	username= request.POST.get("username","")
 	password= request.POST.get("password","")
@@ -52,8 +54,19 @@ def auth_view(request):
 def logout(request):
 	auth.logout(request)
 	return render(request,'logout.html')
+
+@login_required(redirect_field_name='simpleapp1.views.home')
 def loggedin(request):
-	return render(request,'loggedin.html',{'full_name':request.user.username})
+	# user = get_object_or_404(User, pk=user_id)
+	if request.method =='POST':
+		form =VideoUploadForm(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/videolist')
+	args={}
+	args.update(csrf(request))
+	args={'form':VideoUploadForm,'full_name':request.user.username}
+	return render(request,'loggedin.html',args)
 def invalid_login(request):
 	return render(request,'invalid_login.html')
 def register_user(request):
@@ -67,10 +80,11 @@ def register_user(request):
 	args['form']=UserCreationForm
 	return render(request,'register.html',args)
 def register_success(request):
+	return render(request,'register_success.html')
+def video_list(request):
 	videos=VideoUpload.objects.all()
 	lot_of_args={'videos':videos}
-	return render(request,'register_success.html',lot_of_args)
-
+	return render(request,'videolist.html',lot_of_args)
 def upload_pic(request):
 	for count,x in enumerate(request.FILES.getlist("files")):
 		def process(f):
@@ -85,7 +99,7 @@ def upload(request):
 		form =VideoUploadForm(request.POST,request.FILES)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/accounts/register_success')
+			return HttpResponseRedirect('/videolist')
 	args={}
 	args.update(csrf(request))
 	args['form']=VideoUploadForm

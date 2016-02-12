@@ -8,8 +8,8 @@ Polyglot
 <h2> Hi {{full_name}} you are now Logged in! </h2>
 	<p> Click <a href="/accounts/logout/">here</a>to logout.
 	</p>
-	<form action="/upload_pic/" method="post" enctype="multipart/form-data">{% csrf_token %}
-		<input type="file" name="files" multiple/>
-	    <input type="submit" value="Upload" />
+	<form action="/upload/" method="post" enctype="multipart/form-data">{% csrf_token %}
+		{{form}}
+		<input type="submit" value="Upload"/>
 	</form>
 </body>
