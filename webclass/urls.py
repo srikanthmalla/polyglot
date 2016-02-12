@@ -19,5 +19,5 @@ urlpatterns = [
     url(r'^accounts/register/$','simpleapp1.views.register_user'),
     url(r'^accounts/register_success/','simpleapp1.views.register_success'),
     url(r'^upload/','simpleapp1.views.upload'),
-    url(r'^upload_pic/','simpleapp1.views.upload_pic')
+    url(r'^upload_pic/','simpleapp1.views.upload_pic'),
 ]

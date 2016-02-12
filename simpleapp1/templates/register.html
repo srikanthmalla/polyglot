@@ -36,12 +36,12 @@
 	<div class="col-md-4">
 	</div>
 	<div class="col-md-4">
-		<form class="form-signup" action="/accounts/register/" method="post"> <input name="csrfmiddlewaretoken" value="MY7WNqLFwW8EhIaBJX8mNQpl79KQUaGb" type="hidden">
+		<form class="form-signup" action="/accounts/register/" method="post"> {% csrf_token %}
 			<h2>Signup</h2>
 			<label for="id_username" class="sr-only">Username:</label><input class="form-control" placeholder="Username"  id="id_username" maxlength="30" name="username" type="text" required autofocus><br><span class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.<br></span>
 			<label for="id_password1" class="sr-only">Password:</label><input class="form-control" placeholder="Password" id="id_password1" name="password1" type="password" required autofocus><br>
 			<label for="id_password2" class="sr-only">Password confirmation:</label><input class="form-control" placeholder="Password Confirmation" id="id_password2" name="password2" type="password" required autofocus><br><span class="helptext">Enter the same password as above, for verification.</span>
-			<button class="btn btn-default btn-primary btn-block" type="submit"> Register </button>
+			<button class="btn btn-default btn-primary btn-block" type="submit"> Register </button> {% csrf_token %}
 		</form>
 	</div>
 </div>

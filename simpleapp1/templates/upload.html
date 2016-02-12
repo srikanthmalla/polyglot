@@ -1,4 +1,8 @@
-<form action="/upload_pic/" method="post" enctype="multipart/form-data">{% csrf_token %}
+<!-- <form action="/upload_pic/" method="post" enctype="multipart/form-data">{% csrf_token %}
     <input type="file" name="files" multiple>
     <input type="submit" value="Upload" />
+</form> -->
+<form action="/upload/" method="post" enctype="multipart/form-data">{% csrf_token %}
+{{form}}
+<input type="submit" value="Upload"/>
 </form>

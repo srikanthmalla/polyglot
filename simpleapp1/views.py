@@ -6,7 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from os import path
 from django.http import HttpResponseForbidden,HttpResponse
 from django.core.urlresolvers import reverse
-
+from .forms import VideoUploadForm
+from .models import VideoUpload
 #for voice to text thing
 from scipy.io.wavfile import read
 import speech_recognition as sr
@@ -66,7 +67,9 @@ def register_user(request):
 	args['form']=UserCreationForm
 	return render(request,'register.html',args)
 def register_success(request):
-	return render(request,'register_success.html')
+	videos=VideoUpload.objects.all()
+	lot_of_args={'videos':videos}
+	return render(request,'register_success.html',lot_of_args)
 
 def upload_pic(request):
 	for count,x in enumerate(request.FILES.getlist("files")):
@@ -78,4 +81,12 @@ def upload_pic(request):
 	return HttpResponse("File(s) uploaded!")
 
 def upload(request):
-	return render(request,'upload.html',{})
+	if request.method =='POST':
+		form =VideoUploadForm(request.POST,request.FILES)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/accounts/register_success')
+	args={}
+	args.update(csrf(request))
+	args['form']=VideoUploadForm
+	return render(request,'upload.html',args)
