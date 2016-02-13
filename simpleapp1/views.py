@@ -103,7 +103,7 @@ def upload(request):
 		if form.is_valid():
 			model_instance=form.save()#gives object or instance of that model with saving
 			print request.FILES
-			subprocess.call(['ffmpeg','-ss', '7','-i',settings.MEDIA_ROOT+model_instance.file.name,'-t','1','-s','480x300','-f','image2','media/files/'+title+'/imagefile.jpg'])
+			subprocess.call(['ffmpeg','-ss', '7','-i','app/media/'+model_instance.file.name,'-t','1','-s','480x300','-f','image2','media/files/'+title+'/imagefile.jpg'])
 			return HttpResponseRedirect('/videolist')
 	args={}
 	args.update(csrf(request))
