@@ -1,3 +1,7 @@
+
 {% for v in videos%}
 <div>{{v.title}}</div>
+<div>
+    <img id="v" height="200px" width="200px" src="{{MEDIA_URL}}files/{{v.title}}/imagefile.jpg"/>	
+</div>
 {% endfor%}

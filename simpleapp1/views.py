@@ -7,14 +7,15 @@ from os import path
 from django.http import HttpResponseForbidden,HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
+from webclass import settings
 from .forms import VideoUploadForm
 from .models import VideoUpload
 #for voice to text thing
 from scipy.io.wavfile import read
 import speech_recognition as sr
 import datetime
-
+import subprocess
+import os
 
 def subs(request):
 	WAV_FILE = path.join(path.dirname(path.realpath(__file__)), "test.wav")
@@ -96,9 +97,13 @@ def upload_pic(request):
 
 def upload(request):
 	if request.method =='POST':
+		title=request.POST.get("title","")
+		file=request.POST.get("file","")
 		form =VideoUploadForm(request.POST,request.FILES)
 		if form.is_valid():
-			form.save()
+			model_instance=form.save()#gives object or instance of that model with saving
+			print request.FILES
+			subprocess.call(['ffmpeg','-ss', '7','-i','media/'+model_instance.file.name,'-t','1','-s','480x300','-f','image2','media/files/'+title+'/imagefile.jpg'])
 			return HttpResponseRedirect('/videolist')
 	args={}
 	args.update(csrf(request))

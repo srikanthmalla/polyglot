@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^subs/','simpleapp1.views.subs',name='subs'),
     url(r'^videolist/','simpleapp1.views.video_list'),
+
     #user auth urls
     # url(r'^accounts/login/','simpleapp1.views.login'),
 	url(r'^accounts/auth/','simpleapp1.views.auth_view'),
@@ -21,3 +22,13 @@ urlpatterns = [
     url(r'^upload/','simpleapp1.views.upload'),
     url(r'^upload_pic/','simpleapp1.views.upload_pic'),
 ]
+if settings.DEBUG:
+    from django.views.static import serve
+    _media_url = settings.MEDIA_URL
+    if _media_url.startswith('/'):
+        _media_url = _media_url[1:]
+        urlpatterns += patterns('',
+                                (r'^%s(?P<path>.*)$' % _media_url,
+                                serve,
+                                {'document_root': settings.MEDIA_ROOT}))
+    del(_media_url, serve)
